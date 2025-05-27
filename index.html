@@ -76,6 +76,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -173,6 +174,11 @@
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
         }
 
         .panel-header {
@@ -210,6 +216,8 @@
         /* 交易列表 */
         .transaction-list {
             padding: 24px;
+            max-height: 600px;
+            overflow-y: auto;
         }
 
         .transaction-item {
@@ -218,12 +226,14 @@
             justify-content: space-between;
             padding: 16px 0;
             border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+            position: relative;
         }
 
         .transaction-info {
             display: flex;
             align-items: center;
             gap: 16px;
+            flex: 1;
         }
 
         .transaction-icon {
@@ -253,14 +263,30 @@
             font-weight: 600;
         }
 
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-left: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
         /* 表單 */
         .form-container {
             padding: 24px;
-            display: none;
-        }
-
-        .form-container.active {
-            display: block;
         }
 
         .form-group {
@@ -314,6 +340,115 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
+        /* 類別圖標樣式 */
+        .category-food { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .category-transport { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .category-shopping { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .category-entertainment { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .category-health { background: linear-gradient(135deg, #10b981, #059669); }
+        .category-education { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .category-other { background: linear-gradient(135deg, #6b7280, #4b5563); }
+        .category-salary { background: linear-gradient(135deg, #10b981, #059669); }
+        .category-bonus { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .category-investment { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* 預算進度條 */
+        .budget-item {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+
+        .budget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .budget-category {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .budget-amount {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .progress-over {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        /* 圖表容器 */
+        .chart-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .expense-breakdown {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+
+        .breakdown-category {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .breakdown-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
         /* 響應式設計 */
         @media (max-width: 1024px) {
             .container {
@@ -343,30 +478,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* 類別圖標樣式 */
-        .category-food { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .category-transport { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-        .category-shopping { background: linear-gradient(135deg, #ec4899, #db2777); }
-        .category-entertainment { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-        .category-health { background: linear-gradient(135deg, #10b981, #059669); }
-        .category-education { background: linear-gradient(135deg, #f97316, #ea580c); }
-        .category-other { background: linear-gradient(135deg, #6b7280, #4b5563); }
-        .category-salary { background: linear-gradient(135deg, #10b981, #059669); }
-        .category-bonus { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
-        .category-investment { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #64748b;
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
     </style>
 </head>
 <body>
@@ -380,34 +491,34 @@
             <nav>
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active" data-view="dashboard">
+                        <div class="nav-link active" data-view="dashboard">
                             <span class="nav-icon">📊</span>
                             儀表板
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-view="add-expense">
+                        <div class="nav-link" data-view="add-expense">
                             <span class="nav-icon">💳</span>
                             新增支出
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-view="add-income">
+                        <div class="nav-link" data-view="add-income">
                             <span class="nav-icon">💰</span>
                             新增收入
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-view="budget">
+                        <div class="nav-link" data-view="budget">
                             <span class="nav-icon">🎯</span>
                             預算管理
-                        </a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" data-view="reports">
+                        <div class="nav-link" data-view="reports">
                             <span class="nav-icon">📈</span>
                             報表分析
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -424,7 +535,7 @@
                     </div>
                     <div class="stat-value" id="total-income">$0</div>
                     <div class="stat-change positive">
-                        <span>↗</span> 較上月 +0%
+                        <span>↗</span> <span id="income-change">較上月 +0%</span>
                     </div>
                 </div>
 
@@ -435,7 +546,7 @@
                     </div>
                     <div class="stat-value" id="total-expense">$0</div>
                     <div class="stat-change negative">
-                        <span>↗</span> 較上月 +0%
+                        <span>↗</span> <span id="expense-change">較上月 +0%</span>
                     </div>
                 </div>
 
@@ -445,8 +556,8 @@
                         <div class="stat-icon budget-icon">💎</div>
                     </div>
                     <div class="stat-value" id="balance">$0</div>
-                    <div class="stat-change positive">
-                        <span>↗</span> 健康財務狀況
+                    <div class="stat-change" id="balance-trend">
+                        <span>→</span> 財務狀況
                     </div>
                 </div>
             </div>
@@ -454,10 +565,10 @@
             <!-- 內容面板 -->
             <div class="content-panels">
                 <!-- 交易記錄 -->
-                <div class="panel" id="dashboard-view">
+                <div class="panel active" id="dashboard-view">
                     <div class="panel-header">
                         <h3 class="panel-title">最近交易</h3>
-                        <button class="add-btn" onclick="showAddForm()">
+                        <button class="add-btn" onclick="showAddExpenseForm()">
                             <span>+</span> 新增交易
                         </button>
                     </div>
@@ -471,146 +582,181 @@
                 </div>
 
                 <!-- 添加支出表單 -->
-                <div class="panel form-container" id="add-expense-view">
+                <div class="panel" id="add-expense-view">
                     <div class="panel-header">
                         <h3 class="panel-title">新增支出</h3>
                     </div>
-                    <form id="expense-form">
-                        <div class="form-group">
-                            <label class="form-label">金額</label>
-                            <input type="number" class="form-input" name="amount" placeholder="請輸入金額" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">類別</label>
-                            <select class="form-select" name="category" required>
-                                <option value="">請選擇類別</option>
-                                <option value="food">餐飲美食</option>
-                                <option value="transport">交通運輸</option>
-                                <option value="shopping">購物消費</option>
-                                <option value="entertainment">娛樂休閒</option>
-                                <option value="health">醫療保健</option>
-                                <option value="education">教育學習</option>
-                                <option value="other">其他</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">描述</label>
-                            <input type="text" class="form-input" name="description" placeholder="簡單描述這筆支出">
-                        </div>
-                        <div class="form-row">
+                    <div class="form-container">
+                        <form id="expense-form">
                             <div class="form-group">
-                                <label class="form-label">日期</label>
-                                <input type="date" class="form-input" name="date" required>
+                                <label class="form-label">金額</label>
+                                <input type="number" class="form-input" name="amount" placeholder="請輸入金額" step="0.01" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">時間</label>
-                                <input type="time" class="form-input" name="time">
-                            </div>
-                        </div>
-                        <button type="submit" class="submit-btn">新增支出記錄</button>
-                    </form>
-                </div>
-
-                <!-- 添加收入表單 -->
-                <div class="panel form-container" id="add-income-view">
-                    <div class="panel-header">
-                        <h3 class="panel-title">新增收入</h3>
-                    </div>
-                    <form id="income-form">
-                        <div class="form-group">
-                            <label class="form-label">金額</label>
-                            <input type="number" class="form-input" name="amount" placeholder="請輸入金額" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">來源</label>
-                            <select class="form-select" name="category" required>
-                                <option value="">請選擇收入來源</option>
-                                <option value="salary">薪資收入</option>
-                                <option value="bonus">獎金紅利</option>
-                                <option value="investment">投資收益</option>
-                                <option value="other">其他收入</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">描述</label>
-                            <input type="text" class="form-input" name="description" placeholder="簡單描述這筆收入">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">日期</label>
-                                <input type="date" class="form-input" name="date" required>
+                                <label class="form-label">類別</label>
+                                <select class="form-select" name="category" required>
+                                    <option value="">請選擇類別</option>
+                                    <option value="food">餐飲美食</option>
+                                    <option value="transport">交通運輸</option>
+                                    <option value="shopping">購物消費</option>
+                                    <option value="entertainment">娛樂休閒</option>
+                                    <option value="health">醫療保健</option>
+                                    <option value="education">教育學習</option>
+                                    <option value="other">其他</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">時間</label>
-                                <input type="time" class="form-input" name="time">
+                                <label class="form-label">描述</label>
+                                <input type="text" class="form-input" name="description" placeholder="簡單描述這筆支出">
                             </div>
-                        </div>
-                        <button type="submit" class="submit-btn">新增收入記錄</button>
-                    </form>
-                </div>
-
-                <!-- 預算管理 -->
-                <div class="panel form-container" id="budget-view">
-                    <div class="panel-header">
-                        <h3 class="panel-title">預算管理</h3>
-                    </div>
-                    <div style="padding: 24px;">
-                        <p style="color: #64748b; margin-bottom: 24px;">設定各類別的月度預算限額</p>
-                        <form id="budget-form">
-                            <div class="form-group">
-                                <label class="form-label">餐飲美食預算</label>
-                                <input type="number" class="form-input" name="food-budget" placeholder="設定月度預算">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">日期</label>
+                                    <input type="date" class="form-input" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">時間</label>
+                                    <input type="time" class="form-input" name="time">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">交通運輸預算</label>
-                                <input type="number" class="form-input" name="transport-budget" placeholder="設定月度預算">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">購物消費預算</label>
-                                <input type="number" class="form-input" name="shopping-budget" placeholder="設定月度預算">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">娛樂休閒預算</label>
-                                <input type="number" class="form-input" name="entertainment-budget" placeholder="設定月度預算">
-                            </div>
-                            <button type="submit" class="submit-btn">儲存預算設定</button>
+                            <button type="submit" class="submit-btn">新增支出記錄</button>
                         </form>
                     </div>
                 </div>
 
+                <!-- 添加收入表單 -->
+                <div class="panel" id="add-income-view">
+                    <div class="panel-header">
+                        <h3 class="panel-title">新增收入</h3>
+                    </div>
+                    <div class="form-container">
+                        <form id="income-form">
+                            <div class="form-group">
+                                <label class="form-label">金額</label>
+                                <input type="number" class="form-input" name="amount" placeholder="請輸入金額" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">來源</label>
+                                <select class="form-select" name="category" required>
+                                    <option value="">請選擇收入來源</option>
+                                    <option value="salary">薪資收入</option>
+                                    <option value="bonus">獎金紅利</option>
+                                    <option value="investment">投資收益</option>
+                                    <option value="other">其他收入</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">描述</label>
+                                <input type="text" class="form-input" name="description" placeholder="簡單描述這筆收入">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">日期</label>
+                                    <input type="date" class="form-input" name="date" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">時間</label>
+                                    <input type="time" class="form-input" name="time">
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">新增收入記錄</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- 預算管理 -->
+                <div class="panel" id="budget-view">
+                    <div class="panel-header">
+                        <h3 class="panel-title">預算管理</h3>
+                    </div>
+                    <div class="form-container">
+                        <p style="color: #64748b; margin-bottom: 24px;">設定各類別的月度預算限額</p>
+                        <form id="budget-form">
+                            <div class="form-group">
+                                <label class="form-label">餐飲美食預算</label>
+                                <input type="number" class="form-input" name="food" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">交通運輸預算</label>
+                                <input type="number" class="form-input" name="transport" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">購物消費預算</label>
+                                <input type="number" class="form-input" name="shopping" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">娛樂休閒預算</label>
+                                <input type="number" class="form-input" name="entertainment" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">醫療保健預算</label>
+                                <input type="number" class="form-input" name="health" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">教育學習預算</label>
+                                <input type="number" class="form-input" name="education" placeholder="設定月度預算" step="0.01">
+                            </div>
+                            <button type="submit" class="submit-btn">儲存預算設定</button>
+                        </form>
+
+                        <div id="budget-status" style="margin-top: 32px;">
+                            <h4 style="margin-bottom: 20px; color: #1e293b;">預算使用狀況</h4>
+                            <div id="budget-list"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 報表分析 -->
-                <div class="panel form-container" id="reports-view">
+                <div class="panel" id="reports-view">
                     <div class="panel-header">
                         <h3 class="panel-title">財務報表</h3>
                     </div>
-                    <div style="padding: 24px;">
+                    <div class="form-container">
+                        <div class="chart-container">
+                            <p style="color: #64748b;">支出分類圓餅圖</p>
+                        </div>
+                        
+                        <h4 style="margin-bottom: 16px; color: #1e293b;">支出分類統計</h4>
+                        <div class="expense-breakdown" id="expense-breakdown"></div>
+
+                        <h4 style="margin: 32px 0 16px; color: #1e293b;">本月財務摘要</h4>
                         <div class="stats-grid">
                             <div class="stat-card">
-                                <h4 style="margin-bottom: 16px; color: #1e293b;">支出分類統計</h4>
-                                <div id="expense-breakdown"></div>
+                                <h5 style="color: #64748b; margin-bottom: 8px;">平均日支出</h5>
+                                <div style="font-size: 24px; font-weight: 600;" id="avg-daily-expense">$0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h5 style="color: #64748b; margin-bottom: 8px;">最大單筆支出</h5>
+                                <div style="font-size: 24px; font-weight: 600;" id="max-expense">$0</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 快速操作面板 -->
-                <div class="panel">
+                <div class="panel active">
                     <div class="panel-header">
                         <h3 class="panel-title">快速操作</h3>
                     </div>
                     <div style="padding: 24px;">
                         <div style="display: grid; gap: 12px;">
-                            <button class="add-btn" onclick="quickAdd('food', 100)">
+                            <button class="add-btn" onclick="quickAdd('food', 100, '午餐')">
                                 🍕 午餐 $100
                             </button>
-                            <button class="add-btn" onclick="quickAdd('transport', 50)">
+                            <button class="add-btn" onclick="quickAdd('transport', 50, '交通費')">
                                 🚌 交通 $50
                             </button>
-                            <button class="add-btn" onclick="quickAdd('shopping', 200)">
+                            <button class="add-btn" onclick="quickAdd('shopping', 200, '購物')">
                                 🛒 購物 $200
                             </button>
-                            <button class="add-btn" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="quickAddIncome('salary', 50000)">
+                            <button class="add-btn" onclick="quickAdd('food', 30, '咖啡')">
+                                ☕ 咖啡 $30
+                            </button>
+                            <button class="add-btn" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="quickAddIncome('salary', 50000, '薪資')">
                                 💰 薪資入帳
+                            </button>
+                            <button class="add-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="quickAddIncome('bonus', 5000, '獎金')">
+                                🎁 獎金入帳
                             </button>
                         </div>
                     </div>
@@ -620,9 +766,10 @@
     </div>
 
     <script>
-        // 數據儲存
-        let transactions = [];
-        let budgets = {};
+        // 全域變數
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        let budgets = JSON.parse(localStorage.getItem('budgets')) || {};
+        let currentView = 'dashboard';
 
         // 類別對應
         const categoryIcons = {
@@ -653,7 +800,14 @@
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 設置默認日期
+            initializeDateInputs();
+            setupNavigation();
+            setupForms();
+            updateAllDisplays();
+        });
+
+        // 設置日期輸入默認值
+        function initializeDateInputs() {
             const today = new Date().toISOString().split('T')[0];
             const now = new Date().toTimeString().split(' ')[0].slice(0, 5);
             
@@ -661,175 +815,4 @@
                 input.value = today;
             });
             
-            document.querySelectorAll('input[name="time"]').forEach(input => {
-                input.value = now;
-            });
-
-            // 導航事件
-            setupNavigation();
-            
-            // 表單事件
-            setupForms();
-            
-            // 更新顯示
-            updateStats();
-            updateTransactionList();
-        });
-
-        // 導航設置
-        function setupNavigation() {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // 更新導航狀態
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // 顯示對應視圖
-                    const view = this.dataset.view;
-                    showView(view);
-                });
-            });
-        }
-
-        // 顯示視圖
-        function showView(viewName) {
-            // 隱藏所有視圖
-            document.querySelectorAll('.panel').forEach(panel => {
-                if (panel.classList.contains('form-container')) {
-                    panel.classList.remove('active');
-                } else {
-                    panel.style.display = 'none';
-                }
-            });
-            
-            // 顯示對應視圖
-            if (viewName === 'dashboard') {
-                document.getElementById('dashboard-view').style.display = 'block';
-            } else {
-                document.getElementById(viewName + '-view').classList.add('active');
-            }
-        }
-
-        // 表單設置
-        function setupForms() {
-            // 支出表單
-            document.getElementById('expense-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                addTransaction('expense', formData);
-                e.target.reset();
-                showView('dashboard');
-            });
-
-            // 收入表單
-            document.getElementById('income-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                addTransaction('income', formData);
-                e.target.reset();
-                showView('dashboard');
-            });
-
-            // 預算表單
-            document.getElementById('budget-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(e.target);
-                saveBudgets(formData);
-            });
-        }
-
-        // 添加交易
-        function addTransaction(type, formData) {
-            const transaction = {
-                id: Date.now(),
-                type: type,
-                amount: parseFloat(formData.get('amount')),
-                category: formData.get('category'),
-                description: formData.get('description') || categoryNames[formData.get('category')],
-                date: formData.get('date'),
-                time: formData.get('time'),
-                timestamp: new Date()
-            };
-
-            transactions.unshift(transaction);
-            updateStats();
-            updateTransactionList();
-        }
-
-        // 快速添加
-        function quickAdd(category, amount) {
-            const transaction = {
-                id: Date.now(),
-                type: 'expense',
-                amount: amount,
-                category: category,
-                description: categoryNames[category],
-                date: new Date().toISOString().split('T')[0],
-                time: new Date().toTimeString().split(' ')[0].slice(0, 5),
-                timestamp: new Date()
-            };
-
-            transactions.unshift(transaction);
-            updateStats();
-            updateTransactionList();
-        }
-
-        function quickAddIncome(category, amount) {
-            const transaction = {
-                id: Date.now(),
-                type: 'income',
-                amount: amount,
-                category: category,
-                description: categoryNames[category],
-                date: new Date().toISOString().split('T')[0],
-                time: new Date().toTimeString().split(' ')[0].slice(0, 5),
-                timestamp: new Date()
-            };
-
-            transactions.unshift(transaction);
-            updateStats();
-            updateTransactionList();
-        }
-
-        // 更新統計
-        function updateStats() {
-            const totalIncome = transactions
-                .filter(t => t.type === 'income')
-                .reduce((sum, t) => sum + t.amount, 0);
-            
-            const totalExpense = transactions
-                .filter(t => t.type === 'expense')
-                .reduce((sum, t) => sum + t.amount, 0);
-            
-            const balance = totalIncome - totalExpense;
-
-            document.getElementById('total-income').textContent = `$${totalIncome.toLocaleString()}`;
-            document.getElementById('total-expense').textContent = `$${totalExpense.toLocaleString()}`;
-            document.getElementById('balance').textContent = `$${balance.toLocaleString()}`;
-        }
-
-        // 更新交易列表
-        function updateTransactionList() {
-            const listElement = document.getElementById('transaction-list');
-            
-            if (transactions.length === 0) {
-                listElement.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📝</div>
-                        <p>還沒有任何交易記錄</p>
-                        <p>點擊上方按鈕開始記帳吧！</p>
-                    </div>
-                `;
-                return;
-            }
-
-            listElement.innerHTML = transactions.slice(0, 10).map(transaction => `
-                <div class="transaction-item">
-                    <div class="transaction-info">
-                        <div class="transaction-icon category-${transaction.category}">
-                            ${categoryIcons[transaction.category]}
-                        </div>
-                        <div class="transaction-details">
-                            <h4
+            document.querySelectorAll('input[name="
